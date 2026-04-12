@@ -81,23 +81,35 @@ nav {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   width: fit-content;
-  max-height: 0;
-  overflow: hidden;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  opacity: 0;
+  pointer-events: none;
   transition: all 0.3s ease-in-out;
 }
 
 .menu-links a {
   display: block;
-  padding: 10px;
+  padding: 10px 20px;
   text-align: center;
   font-size: 1.5rem;
   color: #121212;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.menu-links a:hover {
+  background-color: #f0f0f0;
+  border-radius: 8px;
 }
 
 .menu-links.open {
-  max-height: 300px;
+  border: 1px solid #e0e0e0;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .hamburger-icon.open span:first-child {
