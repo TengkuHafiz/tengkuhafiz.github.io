@@ -39,10 +39,10 @@ function typeText() {
 
 // Hamburger menu
 function toggleMenu() {
-    const menu = document.querySelector(".menu-links");
-    const icon = document.querySelector(".hamburger-icon");
-    menu.classList.toggle("open");
-    icon.classList.toggle("open");
+    const menus = document.querySelectorAll(".menu-links");
+    const icons = document.querySelectorAll(".hamburger-icon");
+    menus.forEach(menu => menu.classList.toggle("open"));
+    icons.forEach(icon => icon.classList.toggle("open"));
 }
 
 // Project management
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', function() {
         searchBox.addEventListener('input', searchProjects);
         searchBox.addEventListener('blur', hideSearchBox);
     }
-    if (hamburgerIcon) hamburgerIcon.addEventListener('click', toggleMenu);
+    // Removed hamburgerIcon click listener to avoid double toggling with HTML onclick attribute
 
     // Close menu when clicking outside
     document.addEventListener('click', function(event) {
@@ -360,19 +360,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle window resize
     window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
-            const menu = document.querySelector(".menu-links");
-            const icon = document.querySelector(".hamburger-icon");
-            if (menu && icon) {
-                menu.classList.remove("open");
-                icon.classList.remove("open");
-            }
+            const menus = document.querySelectorAll(".menu-links");
+            const icons = document.querySelectorAll(".hamburger-icon");
+            menus.forEach(menu => menu.classList.remove("open"));
+            icons.forEach(icon => icon.classList.remove("open"));
         }
     });
 });
 
 // Function to handle layout changes
 function handleLayoutChange(e) {
-    const desktopNav = document.getElementById('desktop-nav');
+    const desktopNav = document.getElementById('desktop-nav') || document.getElementById('projects-desktop-nav') || document.getElementById('posts-desktop-nav');
     const hamburgerNav = document.getElementById('hamburger-nav');
     
     if (e.matches) {
@@ -381,14 +379,17 @@ function handleLayoutChange(e) {
         if (hamburgerNav) hamburgerNav.style.display = 'flex';
     } else {
         // Desktop layout
-        if (desktopNav) desktopNav.style.display = 'flex';
-        if (hamburgerNav) hamburgerNav.style.display = 'none';
-        // Ensure menu is closed when switching to desktop
-        const menu = document.querySelector(".menu-links");
-        const icon = document.querySelector(".hamburger-icon");
-        if (menu && icon) {
-            menu.classList.remove("open");
-            icon.classList.remove("open");
+        if (desktopNav) {
+            desktopNav.style.display = 'flex';
+            if (hamburgerNav) hamburgerNav.style.display = 'none';
+        } else {
+            if (hamburgerNav) hamburgerNav.style.display = 'flex';
         }
+        
+        // Ensure menu is closed when switching to desktop
+        const menus = document.querySelectorAll(".menu-links");
+        const icons = document.querySelectorAll(".hamburger-icon");
+        menus.forEach(menu => menu.classList.remove("open"));
+        icons.forEach(icon => icon.classList.remove("open"));
     }
 }

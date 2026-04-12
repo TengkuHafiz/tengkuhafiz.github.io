@@ -28,7 +28,17 @@
         <a href="index.html">Tengku</a>
 		</div>
         <div class="nav-links">
-            <!-- Empty to maintain structure but remove links -->
+            <div class="hamburger-menu">
+                <div class="hamburger-icon" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="menu-links">
+                    <a href="projects.html" onclick="toggleMenu()">Projects</a>
+                    <a href="posts.html" onclick="toggleMenu()">Posts</a>
+                </div>
+            </div>
         </div>
     </nav>
     <nav id="hamburger-nav">
@@ -42,7 +52,8 @@
                 <span></span>
             </div>
             <div class="menu-links">
-                <!-- Empty to maintain structure but remove links -->
+                <a href="projects.html" onclick="toggleMenu()">Projects</a>
+                <a href="posts.html" onclick="toggleMenu()">Posts</a>
             </div>
         </div>
     </nav>

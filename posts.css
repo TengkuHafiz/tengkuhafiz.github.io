@@ -1,0 +1,252 @@
+/* posts.css */
+body.posts-page {
+  background-color: #f0f0f0 !important;
+  color: #121212;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.posts-page .posts-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Desktop nav layout to match projects */
+@media (min-width: 769px) {
+  #posts-desktop-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 10rem;
+    background-color: transparent;
+  }
+
+  #posts-desktop-nav .logo {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  #posts-desktop-nav .logo a {
+    color: #121212;
+    text-decoration: none;
+  }
+
+  #hamburger-nav {
+    display: none;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #posts-desktop-nav {
+    display: none;
+  }
+
+  #hamburger-nav {
+    display: flex;
+  }
+}
+
+.posts-page .hamburger-icon span {
+  background-color: #121212 !important;
+}
+
+.posts-page .menu-links {
+  background-color: #ffffff !important;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.posts-page .menu-links.open {
+  border: 1px solid #e0e0e0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.posts-page .menu-links a {
+  color: #121212 !important;
+}
+
+.posts-page .menu-links a:hover {
+  background-color: #f0f0f0 !important;
+  color: #121212 !important;
+}
+
+/* Layout */
+.posts-header {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.posts-header h1 {
+  font-size: 2.2rem;
+  color: #121212;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.posts-header p {
+  color: #4c4c4c;
+  font-size: 1.1rem;
+}
+
+.posts-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  padding-bottom: 50px;
+}
+
+.posts-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Post Card */
+.post-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px;
+  transition: transform 0.3s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  border: none;
+}
+
+.post-card:hover {
+  transform: scale(1.02);
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: #4c4c4c;
+  margin-bottom: 12px;
+}
+
+.post-title {
+  font-size: 1.4rem;
+  color: #121212;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.post-tag {
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  color: #4c4c4c;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* Sidebar */
+.posts-sidebar {
+  width: 300px;
+}
+
+.sidebar-box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+  border: none;
+}
+
+.sidebar-box h3 {
+  color: #121212;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sidebar-tag {
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  color: #121212;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sidebar-tag:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar-tag.active {
+  background-color: #121212;
+  border-color: #121212;
+  color: #ffffff;
+}
+
+/* Single Post View Styles */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4c4c4c;
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 30px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #121212;
+}
+
+.post-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #2c2c2c;
+}
+
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.post-body h2, .post-body h3 {
+  color: #121212;
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .posts-content {
+    flex-direction: column;
+  }
+  .posts-sidebar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,211 @@
+/* admin.css */
+body.admin-page {
+  background-color: #f0f0f0;
+  color: #121212;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.admin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+#admin-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 40px;
+}
+
+.logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #121212;
+  text-decoration: none;
+}
+
+#user-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+/* Login Screen */
+#login-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 400px;
+}
+
+.login-box h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.login-box p {
+  color: #4c4c4c;
+  margin-bottom: 25px;
+}
+
+.error-msg {
+  color: #ef4444 !important;
+  margin-top: 15px !important;
+  margin-bottom: 0 !important;
+  font-weight: 500;
+}
+
+/* Dashboard Screen */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.admin-post-item {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-post-item h3 {
+  margin: 0 0 5px 0;
+}
+
+.admin-post-item p {
+  margin: 0;
+  color: #4c4c4c;
+  font-size: 0.9rem;
+}
+
+.admin-post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-post-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #121212;
+  padding: 5px;
+  transition: color 0.2s;
+}
+
+.admin-post-actions button:hover {
+  color: #4c4c4c;
+}
+
+.btn-delete:hover {
+  color: #ef4444 !important;
+}
+
+/* Editor Section */
+.editor-section {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  margin-bottom: 50px;
+}
+
+.editor-section h2 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row-group {
+  flex-direction: row;
+  gap: 20px;
+}
+
+.half-width {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #121212;
+}
+
+input[type="text"] {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #121212;
+}
+
+#quill-editor {
+  height: 400px;
+  font-size: 1.1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-color: #ccc !important;
+}
+
+.ql-container {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-color: #ccc !important;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 25px;
+}
