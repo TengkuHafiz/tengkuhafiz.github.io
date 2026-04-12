@@ -38,14 +38,16 @@ function typeText() {
 }
 
 // Hamburger menu
-function toggleMenu() {
+function toggleMenu(e) {
+    if (e) {
+        e.stopPropagation();
+    }
     const menus = document.querySelectorAll(".menu-links");
     const icons = document.querySelectorAll(".hamburger-icon");
     menus.forEach(menu => menu.classList.toggle("open"));
     icons.forEach(icon => icon.classList.toggle("open"));
 }
 
-// Project management
 // Project management
 const projects = [
   {
@@ -235,10 +237,12 @@ let sortAsc = true;
 function sortProjects() {
     if (sortAsc) {
         projects.sort((a, b) => a.name.localeCompare(b.name));
-        document.getElementById('sort-btn').innerHTML = `<i class='fas fa-sort-alpha-down'></i>`;
+        const sortBtn = document.getElementById('sort-btn');
+        if (sortBtn) sortBtn.innerHTML = `<i class='fas fa-sort-alpha-down'></i>`;
     } else {
         projects.sort((a, b) => b.name.localeCompare(a.name));
-        document.getElementById('sort-btn').innerHTML = `<i class='fas fa-sort-alpha-up'></i>`;
+        const sortBtn = document.getElementById('sort-btn');
+        if (sortBtn) sortBtn.innerHTML = `<i class='fas fa-sort-alpha-up'></i>`;
     }
     sortAsc = !sortAsc;
     renderProjects(projects);
@@ -333,7 +337,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const sortBtn = document.getElementById('sort-btn');
     const searchBtn = document.getElementById('search-btn');
     const searchBox = document.getElementById('search-box');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
 
     if (sortBtn) sortBtn.addEventListener('click', sortProjects);
     if (searchBtn) searchBtn.addEventListener('click', showSearchBox);
@@ -341,14 +344,35 @@ document.addEventListener('DOMContentLoaded', function() {
         searchBox.addEventListener('input', searchProjects);
         searchBox.addEventListener('blur', hideSearchBox);
     }
-    // Removed hamburgerIcon click listener to avoid double toggling with HTML onclick attribute
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const menu = document.querySelector(".menu-links");
-        const hamburgerIcon = document.querySelector(".hamburger-icon");
-        if (menu && hamburgerIcon && menu.classList.contains('open') && !menu.contains(event.target) && !hamburgerIcon.contains(event.target)) {
-            toggleMenu();
+    // Attach menu toggle listeners
+    document.querySelectorAll('.hamburger-icon').forEach(icon => {
+        icon.addEventListener('click', toggleMenu);
+    });
+
+    document.querySelectorAll('.menu-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Close menu after clicking a link
+            const menus = document.querySelectorAll(".menu-links");
+            const icons = document.querySelectorAll(".hamburger-icon");
+            menus.forEach(menu => menu.classList.remove("open"));
+            icons.forEach(icon => icon.classList.remove("open"));
+        });
+    });
+
+    // Close menu when clicking anywhere else on the document
+    document.addEventListener('click', function() {
+        const menus = document.querySelectorAll(".menu-links");
+        const icons = document.querySelectorAll(".hamburger-icon");
+        
+        let isAnyOpen = false;
+        menus.forEach(menu => {
+            if (menu.classList.contains('open')) isAnyOpen = true;
+        });
+
+        if (isAnyOpen) {
+            menus.forEach(menu => menu.classList.remove("open"));
+            icons.forEach(icon => icon.classList.remove("open"));
         }
     });
 
