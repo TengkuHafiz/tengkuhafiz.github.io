@@ -1,8 +1,8 @@
 // posts.js
 import { db } from './firebase-config.js';
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const postsListContainer = document.querySelector('.posts-list');
     
     try {
@@ -11,54 +11,60 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-        const querySnapshot = await getDocs(q);
         
-        postsListContainer.innerHTML = ''; // Clear loading spinner
-        
-        if (!querySnapshot.empty) {
-            querySnapshot.forEach((docSnap) => {
-                const post = docSnap.data();
-                const id = docSnap.id;
-                
-                // Construct tags HTML and data attribute string
-                let tagsHtml = '';
-                let tagsArray = [];
-                if (post.tags) {
-                    const tagList = post.tags.split(',').map(t => t.trim());
-                    tagsArray = tagList;
+        // onSnapshot fires instantly with cached data, then again with server updates
+        onSnapshot(q, (querySnapshot) => {
+            postsListContainer.innerHTML = ''; // Clear loading spinner or old cache
+            
+            if (!querySnapshot.empty) {
+                querySnapshot.forEach((docSnap) => {
+                    const post = docSnap.data();
+                    const id = docSnap.id;
                     
-                    // Show max 3 tags, then + X more
-                    for(let i=0; i<Math.min(tagList.length, 3); i++) {
-                        tagsHtml += `<span class="post-tag">${tagList[i]}</span>\n`;
+                    // Construct tags HTML and data attribute string
+                    let tagsHtml = '';
+                    let tagsArray = [];
+                    if (post.tags) {
+                        const tagList = post.tags.split(',').map(t => t.trim());
+                        tagsArray = tagList;
+                        
+                        // Show max 3 tags, then + X more
+                        for(let i=0; i<Math.min(tagList.length, 3); i++) {
+                            tagsHtml += `<span class="post-tag">${tagList[i]}</span>\n`;
+                        }
+                        if(tagList.length > 3) {
+                            tagsHtml += `<span class="post-tag">+ ${tagList.length - 3} more</span>\n`;
+                        }
                     }
-                    if(tagList.length > 3) {
-                        tagsHtml += `<span class="post-tag">+ ${tagList.length - 3} more</span>\n`;
-                    }
-                }
 
-                const dataTagsAttr = tagsArray.join(',');
+                    const dataTagsAttr = tagsArray.join(',');
 
-                const cardHtml = `
-                    <div class="post-card" data-tags="${dataTagsAttr}" data-url="post.html?id=${id}">
-                        <div class="post-meta">${post.dateString} &bull; ${post.readTime}</div>
-                        <h2 class="post-title">${post.title}</h2>
-                        <div class="post-tags">
-                            ${tagsHtml}
+                    const cardHtml = `
+                        <div class="post-card" data-tags="${dataTagsAttr}" data-url="post.html?id=${id}">
+                            <div class="post-meta">${post.dateString} &bull; ${post.readTime}</div>
+                            <h2 class="post-title">${post.title}</h2>
+                            <div class="post-tags">
+                                ${tagsHtml}
+                            </div>
                         </div>
-                    </div>
-                `;
-                postsListContainer.insertAdjacentHTML('beforeend', cardHtml);
-            });
-        } else {
-            postsListContainer.innerHTML = '<p>No posts found. Create one in the admin dashboard!</p>';
-        }
+                    `;
+                    postsListContainer.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            } else {
+                postsListContainer.innerHTML = '<p>No posts found. Create one in the admin dashboard!</p>';
+            }
+            
+            // Re-initialize interactive logic since DOM elements were rebuilt
+            initializePostsInteractions();
+        }, (error) => {
+            console.log(error.message);
+            postsListContainer.innerHTML = '<p>Error loading posts. Please check Firebase connection.</p>';
+        });
+
     } catch (error) {
         console.log(error.message);
         postsListContainer.innerHTML = '<p>Error loading posts. Please check Firebase connection.</p>';
     }
-
-    // Now initialize the interactive logic on whatever posts exist
-    initializePostsInteractions();
 });
 
 function initializePostsInteractions() {
