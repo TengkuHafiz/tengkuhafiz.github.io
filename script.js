@@ -171,7 +171,7 @@ const projects = [
     "isnew": false
   },
   {
-    "name": "Create a landing page using Firebase",
+    "name": "CREATE A LANDING PAGE USING FIREBASE",
     "description": "NULL",
     "url": "https://drive.google.com/drive/folders/14OYKs0n65SRD3FQjamnLfKsuwKmEE3bD?usp=drive_link",
     "isnew": false
@@ -192,12 +192,6 @@ const projects = [
     "name": "LEARN SQL COMMANDS",
     "description": "NULL",
     "url": "https://drive.google.com/drive/folders/1sKK17FObu5wYu0drVlQRkjtQXFBuzRL8?usp=drive_link",
-    "isnew": false
-  },
-  {
-    "name": "EXCEL USING FORMULA, VLOOKUP AND PIVOT TABLE",
-    "description": "NULL",
-    "url": "https://drive.google.com/drive/folders/1-v1FvdDOe1LZGcBlBMs8CRF5CwqbN7pr",
     "isnew": false
   },
   {
